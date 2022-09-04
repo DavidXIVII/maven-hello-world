@@ -51,6 +51,10 @@ jobs:
         branch: ${{ github.ref }}
         force_with_lease: true
         
+    - name: Get Version
+      run: |
+        $VERSION = mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout
+        echo VERSION
         
     - name: Build and push
       uses: docker/build-push-action@v2
