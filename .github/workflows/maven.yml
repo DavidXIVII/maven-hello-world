@@ -48,7 +48,10 @@ jobs:
     - name: Update Version
       env:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
-      run: echo ${{ env.version }}
+      run: |
+        echo ${{ env.version }}
+        ver=${{ env.version}}
+        echo $ver
       
     - name: Login to DockerHub
       uses: docker/login-action@v1
