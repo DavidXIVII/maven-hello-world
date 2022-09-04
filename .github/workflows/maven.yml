@@ -58,6 +58,6 @@ jobs:
         echo ${{ env.name }}
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/java:v${{ env.version }} \
         --build-arg version=${{ env.version }} \
-        --build-arg app-name=${{ env.name }} \
+        --build-arg app_name=${{ env.name }} \
         -f my-app/Dockerfile .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/java:v${{ env.version }}
