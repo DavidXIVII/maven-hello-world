@@ -56,6 +56,9 @@ jobs:
 #         username: ${{ secrets.DOCKERHUB_USERNAME }}
 #         password: ${{ secrets.DOCKERHUB_TOKEN }}           
       
+    - name: Dive in
+      run: cd my-app
+      
     - name: Docker Build Tag Publish
       uses: bitovi/github-actions-docker-publish@v1.0.3
       with:
@@ -65,9 +68,6 @@ jobs:
         image_tag: ${{ env.version }}
         org_name: davideden
         repo_name: java
-    - run: |
-        echo "Image Created:  ${{ env.image }}"
-        echo "Tag Created: ${{ env.tag }}"
         
 #     - name: Setup Docker Buildx
 #       uses: docker/setup-buildx-action@v1            
