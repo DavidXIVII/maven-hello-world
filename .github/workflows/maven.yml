@@ -7,7 +7,9 @@ name: Maven CI
 on:
   push:
     branches: [ "master" ]
-
+    
+env:
+  version: 0
 
 jobs:
   build:
@@ -61,6 +63,7 @@ jobs:
       
     - name: Build Image
       run: |
+        echo ${{ env.version }}
         ver=${{ env.version}}
         echo $ver
         docker build -t davideden/java:$(echo $ver) -f my-app/Dockerfile .
