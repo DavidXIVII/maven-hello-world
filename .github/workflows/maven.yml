@@ -55,7 +55,6 @@ jobs:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
          name: $(mvn help:evaluate -Dexpression=project.name -q -DforceStdout --file ./my-app/pom.xml)
       run: |
-        echo ${{ env.name }}
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/java:v${{ env.version }} \
         --build-arg version=${{ env.version }} \
         --build-arg app_name=${{ env.name }} \
