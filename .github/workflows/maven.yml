@@ -54,7 +54,6 @@ jobs:
     - name: Get Version
       run: |
         version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
-        echo $version
         
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -62,4 +61,4 @@ jobs:
           context: .
           file: ./my-app/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/java:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/java:$(echo $version)
