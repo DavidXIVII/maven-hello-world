@@ -60,7 +60,7 @@ jobs:
     - name: Build Image
       run: |
         docker build -t davideden/java -f my-app/Dockerfile .
-        echo ${{ env.version }} | docker tag davideden/java davideden/java:
+        docker tag davideden/java davideden/java:$(echo ${{ env.version }})
         
 #     - name: Setup Docker Buildx
 #       uses: docker/setup-buildx-action@v1            
