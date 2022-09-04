@@ -1,6 +1,7 @@
 FROM openjdk:11-slim
 WORKDIR /java
 ARG version
+ARG app-name
 ENV rootdir="my-app/target"
-COPY ${rootdir}/my-app-${version}.jar ./application.jar
+COPY ${rootdir}/${app-name}-${version}.jar ./application.jar
 CMD ["java", "-jar", "application.jar"]
