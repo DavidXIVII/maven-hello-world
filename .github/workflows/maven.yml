@@ -59,8 +59,8 @@ jobs:
       env:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
       run: |
-        docker build -t davideden/java:${{ env.version }} -f my-app/Dockerfile .
-        docker push davideden/java:${{ env.version }}
+        docker build -t davideden/java:v${{ env.version }} --build-arg version=${{ env.version }} -f my-app/Dockerfile .
+        docker push davideden/java:v${{ env.version }}
         
 #     - name: Setup Docker Buildx
 #       uses: docker/setup-buildx-action@v1            
