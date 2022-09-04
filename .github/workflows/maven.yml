@@ -50,9 +50,8 @@ jobs:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
       run: echo ${{ env.version }}
       
-    - id: docker-publish
-      name: Build image
-      uses: bitovi/github-actions-docker-publish@1.0.3
+    - name: Docker Build Tag Publish
+      uses: bitovi/github-actions-docker-publish@v1.0.3
       with:
         docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
         docker_password: ${{ secrets.DOCKERHUB_PASSWORD }}
