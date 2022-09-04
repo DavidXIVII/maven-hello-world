@@ -53,7 +53,7 @@ jobs:
         
     - name: Get Version
       run: |
-        VERSION=mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml
+        mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout --file ./my-app/pom.xml
         echo $VERSION
         
     - name: Build and push
