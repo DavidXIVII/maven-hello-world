@@ -53,8 +53,8 @@ jobs:
         
     - name: Get Version
       run: |
-        mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout --file ./my-app/pom.xml
-        echo $VERSION
+        version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
+        echo $version
         
     - name: Build and push
       uses: docker/build-push-action@v2
