@@ -54,7 +54,7 @@ jobs:
     - uses: mr-smithers-excellent/docker-build-push@v3
       with:
         image: davideden/java
-        tags: ${{ env.version }}
+        tag: ${{ env.version }}
         dockerfile: ./my-app/Dockerfile
         registry: docker.io
         username: ${{ secrets.DOCKERHUB_USERNAME }}
