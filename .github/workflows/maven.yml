@@ -51,9 +51,8 @@ jobs:
         branch: ${{ github.ref }}
         force_with_lease: true
         
-    - name: Get Version
-      run: |
-        version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
+    - env:
+        version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
         
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -61,4 +60,4 @@ jobs:
           context: .
           file: ./my-app/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/java:$version
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/java:${{ env.version }}
