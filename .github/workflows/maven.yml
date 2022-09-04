@@ -57,7 +57,6 @@ jobs:
         docker_password: ${{ secrets.DOCKERHUB_PASSWORD }}
         checkout: 'false'
         image_tag: ${{ env.version }}
-        sha: 'true' # won't do anything since image_tag is set
         org_name: davideden
         repo_name: java
     - run: |
