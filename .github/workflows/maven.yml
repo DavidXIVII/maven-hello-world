@@ -50,7 +50,7 @@ jobs:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
       run: |
         echo ${{ env.version }}
-        ver=${{ env.version}}
+
       
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -61,6 +61,7 @@ jobs:
       
     - name: Build Image
       run: |
+        ver=${{ env.version}}
         echo $ver
         docker build -t davideden/java:$(echo $ver) -f my-app/Dockerfile .
         
