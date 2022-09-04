@@ -1,4 +1,4 @@
-FROM openjdk:11-slim
+FROM eclipse-temurin:8-jre
 WORKDIR /java
 ARG version
 ARG app_name
