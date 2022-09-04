@@ -55,6 +55,7 @@ jobs:
     - name: Update Version
       env:
          env.version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
+      run: echo ${{ env.version }}
         
     - name: Build and push
       uses: docker/build-push-action@v2
