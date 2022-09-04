@@ -55,6 +55,7 @@ jobs:
         force_with_lease: true
         
     - name: Update Version
+      run:
         ${{ env.version }} = $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
         
     - name: Build and push
