@@ -22,6 +22,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 8
+        
     - name: Update POM Version
       run: mvn validate -DbumpPatch --file ./my-app/pom.xml
       
@@ -46,13 +47,7 @@ jobs:
         github_token: ${{ secrets.HUB_TOKEN }}
         branch: ${{ github.ref }}
         force_with_lease: true
-        
-    - name: Update Version
-
-      run: |
-        echo ${{ env.version }}
-
-      
+  
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
@@ -60,7 +55,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}           
       
       
-    - name: Build Image
+    - name: Fetch Version & Build Image
       env:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
       run: |
