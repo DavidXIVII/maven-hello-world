@@ -50,29 +50,21 @@ jobs:
          version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
       run: echo ${{ env.version }}
       
-
-    - uses: mr-smithers-excellent/docker-build-push@v3
+        
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v1            
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
-        image: davideden/java
-        tag: ${{ env.version }}
-        dockerfile: ./my-app/Dockerfile
-        registry: docker.io
         username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}    
+        password: ${{ secrets.DOCKERHUB_TOKEN }}       
         
-#     - name: Setup Docker Buildx
-#       uses: docker/setup-buildx-action@v1            
-#     - name: Login to DockerHub
-#       uses: docker/login-action@v1
-#       with:
-#         username: ${{ secrets.DOCKERHUB_USERNAME }}
-#         password: ${{ secrets.DOCKERHUB_TOKEN }}       
-        
-#     - name: Build and push
-#       uses: docker/build-push-action@v2
-#       with:
-#           context: .
-#           file: ./my-app/Dockerfile
-#           push: true
-#           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java
-#           labels: ${{ env.version }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+          images: |
+           davideden/java
+          context: .
+          file: ./my-app/Dockerfile
+          push: true
+          tags: ${{ env.version }}
