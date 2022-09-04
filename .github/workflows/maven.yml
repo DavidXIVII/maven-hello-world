@@ -48,8 +48,7 @@ jobs:
         force_with_lease: true
         
     - name: Update Version
-      env:
-         version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
+
       run: |
         echo ${{ env.version }}
 
@@ -62,11 +61,11 @@ jobs:
       
       
     - name: Build Image
+      env:
+         version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file ./my-app/pom.xml)
       run: |
-        echo ${{ env.version }}
-        ver=${{ env.version}}
-        echo $ver
-        docker build -t davideden/java:$(echo $ver) -f my-app/Dockerfile .
+        docker build -t davideden/java:${{ env.version }} -f my-app/Dockerfile .
+        docker push davideden/java:${{ env.version }}
         
 #     - name: Setup Docker Buildx
 #       uses: docker/setup-buildx-action@v1            
